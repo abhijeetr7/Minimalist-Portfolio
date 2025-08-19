@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimalist Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Design System */
+        :root {
+            /* Colors */
+            --primary-dark-blue: #2c3445;
+            --primary-desaturated-cyan: #5fb4a2;
+            --primary-light-cream: #fafafa;
+            --primary-dark-grayish-blue: #444548;
+            --primary-red: #ff3e3e;
+
+            /* Fonts */
+            --font-family-sans: 'Public Sans', sans-serif;
+
+            /* Font Sizes */
+            --font-size-xl: 50px;
+            --font-size-l: 40px;
+            --font-size-m: 32px;
+            --font-size-s: 16px;
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family-sans);
+            background-color: var(--primary-light-cream);
+            color: var(--primary-dark-blue);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .container {
+            max-width: 1110px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Utility Classes */
+        .section-hidden {
+            display: none;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 17px 30px;
+            text-transform: uppercase;
+            font-size: var(--font-size-s);
+            font-weight: 400;
+            letter-spacing: 2px;
+            border: 1px solid var(--primary-dark-blue);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-dark-blue);
+            color: var(--primary-light-cream);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary-dark-blue);
+        }
+
+        .btn-secondary:hover, .btn-secondary:focus {
+            background-color: var(--primary-dark-blue);
+            color: var(--primary-light-cream);
+        }
+
+        .btn-primary:hover, .btn-primary:focus {
+            background-color: var(--primary-desaturated-cyan);
+            border-color: var(--primary-desaturated-cyan);
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+        }
+
+        h1 {
+            font-size: var(--font-size-xl);
+            line-height: 1;
+            margin-bottom: 24px;
+        }
+
+        h2 {
+            font-size: var(--font-size-l);
+            line-height: 1;
+            margin-bottom: 24px;
+        }
+
+        h3 {
+            font-size: var(--font-size-m);
+            line-height: 1;
+        }
+
+        p {
+            font-size: var(--font-size-s);
+            color: var(--primary-dark-grayish-blue);
+        }
+
+        /* Header */
+        header {
+            padding: 32px 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: var(--font-size-m);
+            font-weight: 700;
+            letter-spacing: -2px;
+        }
+
+        .nav-toggle {
+            display: none;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            font-size: 24px;
+        }
+
+        .main-nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        .main-nav li {
+            margin-left: 42px;
+        }
+
+        .main-nav a {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 12px;
+            font-weight: 700;
+            position: relative;
+        }
+
+        .main-nav a.active::after,
+        .main-nav a:hover::after,
+        .main-nav a:focus::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-desaturated-cyan);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            margin-bottom: 150px;
+        }
+
+        .hero-bg {
+            background: url("https://placehold.co/1110x600/d9d9d9/333333?text=Hero+Image+Desktop") no-repeat center center/cover;
+            min-height: 600px;
+        }
+
+        .hero-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-light-cream);
+            padding: 56px 56px 0 0;
+            max-width: 445px;
+        }
+
+        .hero-content p {
+            margin-bottom: 40px;
+        }
+        
+        /* About Section */
+        .about-section {
+            display: flex;
+            align-items: center;
+            gap: 125px;
+            margin-bottom: 150px;
+        }
+
+        .about-image {
+            background: url("https://placehold.co/540x600/d9d9d9/333333?text=About+Image+Desktop") no-repeat center center/cover;
+            min-height: 600px;
+            flex: 1;
+        }
+
+        .about-content {
+            flex: 1;
+        }
+        
+        .about-content h2 {
+            margin-bottom: 28px;
+        }
+
+        .about-content p {
+            margin-bottom: 28px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 150px;
+        }
+
+        .cta-section h2 {
+            font-size: var(--font-size-l);
+            line-height: 1;
+        }
+
+        .cta-section .btn {
+            border-color: var(--primary-dark-blue);
+            color: var(--primary-dark-blue);
+        }
+        
+        .cta-section .btn:hover, .cta-section .btn:focus {
+            background-color: var(--primary-dark-blue);
+            color: var(--primary-light-cream);
+        }
+
+        /* Portfolio Grid */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 150px;
+            margin-bottom: 150px;
+        }
+
+        .portfolio-item {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+        
+        .portfolio-item:nth-child(even) {
+            flex-direction: column-reverse;
+        }
+
+        .portfolio-image {
+            background: url("https://placehold.co/540x500/d9d9d9/333333?text=Portfolio+Image") no-repeat center center/cover;
+            height: 500px;
+        }
+
+        .portfolio-content {
+            border-top: 1px solid var(--primary-dark-grayish-blue);
+            border-bottom: 1px solid var(--primary-dark-grayish-blue);
+            padding: 48px 0;
+        }
+
+        .portfolio-content h3 {
+            margin-bottom: 29px;
+        }
+        
+        .portfolio-content p {
+            margin-bottom: 24px;
+        }
+
+        /* Portfolio Detail */
+        .portfolio-detail-header {
+            margin-bottom: 115px;
+        }
+
+        .portfolio-detail-hero {
+            background: url("https://placehold.co/1110x500/d9d9d9/333333?text=Portfolio+Detail+Hero+Image") no-repeat center center/cover;
+            min-height: 500px;
+            margin-bottom: 115px;
+        }
+
+        .portfolio-detail-content {
+            display: flex;
+            gap: 125px;
+            margin-bottom: 115px;
+        }
+        
+        .project-intro {
+            flex: 1;
+            border-top: 1px solid var(--primary-dark-grayish-blue);
+            border-bottom: 1px solid var(--primary-dark-grayish-blue);
+            padding: 48px 0;
+        }
+        
+        .project-intro h2 {
+            margin-bottom: 29px;
+        }
+        
+        .project-intro p {
+            margin-bottom: 24px;
+        }
+
+        .project-details {
+            flex: 1;
+        }
+        
+        .project-details p {
+            margin-bottom: 16px;
+        }
+
+        .project-details .btn {
+            margin-top: 23px;
+        }
+
+        .project-background {
+            margin-bottom: 115px;
+        }
+        
+        .project-background h3 {
+            margin-bottom: 28px;
+        }
+
+        .project-images {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .project-images div {
+            background: url("https://placehold.co/1110x300/d9d9d9/333333?text=Detail+Image") no-repeat center center/cover;
+            min-height: 300px;
+        }
+
+        .prev-next-project {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            border-top: 1px solid var(--primary-dark-grayish-blue);
+            border-bottom: 1px solid var(--primary-dark-grayish-blue);
+            margin-bottom: 150px;
+        }
+        
+        .project-link {
+            flex: 1;
+            padding: 32px 0;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .project-link:first-child {
+            border-right: 1px solid var(--primary-dark-grayish-blue);
+        }
+
+        .project-link:hover, .project-link:focus {
+            color: var(--primary-desaturated-cyan);
+        }
+        
+        .project-link h3 {
+            margin-bottom: 8px;
+        }
+
+        .project-link span {
+            font-size: var(--font-size-s);
+            color: var(--primary-dark-grayish-blue);
+            text-transform: capitalize;
+        }
+
+        /* Contact Section */
+        .contact-form-section {
+            margin-bottom: 150px;
+        }
+
+        .contact-content {
+            display: flex;
+            gap: 125px;
+        }
+        
+        .contact-content h2 {
+            flex: 1;
+        }
+
+        .contact-form {
+            flex: 1;
+        }
+
+        .contact-form form {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-group {
+            margin-bottom: 24px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 9px;
+            font-size: var(--font-size-s);
+            color: var(--primary-dark-grayish-blue);
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            background-color: var(--primary-dark-grayish-blue);
+            color: var(--primary-light-cream);
+            border: none;
+            padding: 16px 20px;
+            font-size: var(--font-size-s);
+            resize: vertical;
+        }
+
+        .form-group input::placeholder, .form-group textarea::placeholder {
+            color: var(--primary-light-cream);
+            opacity: 0.5;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border: 1px solid var(--primary-desaturated-cyan);
+            padding: 15px 19px;
+        }
+
+        .error-message {
+            color: var(--primary-red);
+            font-size: 12px;
+            margin-top: 4px;
+            display: none;
+        }
+
+        .form-group.error input,
+        .form-group.error textarea {
+            border: 1px solid var(--primary-red);
+            padding: 15px 19px;
+        }
+
+        .contact-form .btn {
+            background-color: var(--primary-desaturated-cyan);
+            border-color: var(--primary-desaturated-cyan);
+            color: var(--primary-light-cream);
+        }
+        
+        .contact-form .btn:hover, .contact-form .btn:focus {
+            background-color: var(--primary-desaturated-cyan);
+            opacity: 0.75;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-dark-blue);
+            padding: 24px 0;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-nav {
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-nav .logo {
+            color: var(--primary-light-cream);
+            margin-right: 48px;
+        }
+
+        .footer-nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        .footer-nav li {
+            margin-right: 42px;
+        }
+
+        .footer-nav a {
+            color: var(--primary-light-cream);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .footer-nav a:hover, .footer-nav a:focus {
+            color: var(--primary-desaturated-cyan);
+        }
+
+        .social-icons a {
+            font-size: 24px; /* A simple way to represent social icons */
+            color: var(--primary-light-cream);
+            transition: color 0.3s ease;
+        }
+        
+        .social-icons a:not(:last-child) {
+            margin-right: 16px;
+        }
+        
+        .social-icons a:hover, .social-icons a:focus {
+            color: var(--primary-desaturated-cyan);
+        }
+
+        /* Media Queries - Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 16px;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+            
+            .main-nav {
+                display: none;
+                position: absolute;
+                top: 88px; /* Height of the header */
+                left: 0;
+                width: 100%;
+                background-color: var(--primary-dark-blue);
+                padding: 24px;
+                text-align: center;
+            }
+
+            .main-nav.is-open {
+                display: block;
+            }
+
+            .main-nav ul {
+                flex-direction: column;
+            }
+
+            .main-nav li {
+                margin: 0 0 16px 0;
+            }
+
+            .main-nav a {
+                color: var(--primary-light-cream);
+            }
+            
+            .hero {
+                margin-bottom: 96px;
+            }
+
+            .hero-bg {
+                background-image: url("https://placehold.co/768x600/d9d9d9/333333?text=Hero+Image+Tablet");
+            }
+            
+            .hero-content {
+                position: static;
+                padding: 56px 0 0 0;
+                max-width: 100%;
+                margin-top: -100px;
+                background-color: transparent;
+            }
+            
+            h1 {
+                font-size: var(--font-size-l);
+            }
+            
+            h2 {
+                font-size: var(--font-size-m);
+            }
+
+            .about-section {
+                flex-direction: column;
+                gap: 48px;
+                text-align: center;
+                margin-bottom: 96px;
+            }
+
+            .about-image {
+                background-image: url("https://placehold.co/689x600/d9d9d9/333333?text=About+Image+Tablet");
+                width: 100%;
+            }
+
+            .about-content h2 {
+                margin-bottom: 16px;
+            }
+            
+            .about-content p {
+                margin-bottom: 24px;
+            }
+            
+            .cta-section {
+                flex-direction: column;
+                gap: 32px;
+                text-align: center;
+                margin-bottom: 96px;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+                gap: 80px;
+                margin-bottom: 96px;
+            }
+
+            .portfolio-item, .portfolio-item:nth-child(even) {
+                flex-direction: column;
+            }
+            
+            .portfolio-content {
+                padding: 24px 0;
+            }
+
+            .portfolio-detail-hero {
+                background-image: url("https://placehold.co/768x500/d9d9d9/333333?text=Portfolio+Detail+Hero+Image+Tablet");
+                min-height: 311px;
+                margin-bottom: 80px;
+            }
+            
+            .portfolio-detail-content {
+                flex-direction: column;
+                gap: 48px;
+                margin-bottom: 80px;
+            }
+
+            .project-intro {
+                padding: 32px 0;
+            }
+
+            .project-background {
+                margin-bottom: 80px;
+            }
+            
+            .project-images div {
+                background-image: url("https://placehold.co/689x300/d9d9d9/333333?text=Detail+Image+Tablet");
+            }
+
+            .contact-content {
+                flex-direction: column;
+                gap: 48px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+            }
+
+            .footer-nav {
+                flex-direction: column;
+                margin-bottom: 24px;
+                text-align: center;
+            }
+            
+            .footer-nav .logo {
+                margin-right: 0;
+                margin-bottom: 24px;
+            }
+
+            .footer-nav ul {
+                flex-direction: column;
+            }
+            
+            .footer-nav li {
+                margin: 0 0 16px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 32px;
+            }
+            
+            h2 {
+                font-size: 28px;
+            }
+
+            h3 {
+                font-size: 24px;
+            }
+            
+            .hero-bg {
+                background-image: url("https://placehold.co/375x600/d9d9d9/333333?text=Hero+Image+Mobile");
+            }
+
+            .hero-content {
+                padding-top: 24px;
+            }
+            
+            .about-image {
+                background-image: url("https://placehold.co/311x600/d9d9d9/333333?text=About+Image+Mobile");
+            }
+
+            .about-section {
+                text-align: left;
+            }
+
+            .cta-section {
+                text-align: left;
+            }
+            
+            .portfolio-detail-hero {
+                background-image: url("https://placehold.co/375x500/d9d9d9/333333?text=Portfolio+Detail+Hero+Image+Mobile");
+                min-height: 250px;
+            }
+            
+            .project-images div {
+                background-image: url("https://placehold.co/311x300/d9d9d9/333333?text=Detail+Image+Mobile");
+            }
+            
+            .prev-next-project {
+                flex-direction: column;
+                border: none;
+            }
+            
+            .project-link:first-child {
+                border-right: none;
+                border-bottom: 1px solid var(--primary-dark-grayish-blue);
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Main Header -->
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo" data-nav="home">PORTFOLIO</a>
+            <button class="nav-toggle" aria-label="Toggle navigation">&#9776;</button>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#" data-nav="home" class="active">HOME</a></li>
+                    <li><a href="#" data-nav="portfolio">PORTFOLIO</a></li>
+                    <li><a href="#" data-nav="contact">CONTACT ME</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Homepage Section -->
+    <main id="home-page" class="page-section">
+        <section class="hero">
+            <div class="container">
+                <div class="hero-bg"></div>
+                <div class="hero-content">
+                    <h1>I'm Jane Doe, a minimalist designer.</h1>
+                    <p>I help businesses grow by crafting minimalist, beautiful, and intuitive digital experiences. My work is simple, clean, and to the point.</p>
+                    <a href="#" class="btn btn-primary" id="about-scroll-btn">ABOUT ME</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-section container" id="about-me-section">
+            <div class="about-image"></div>
+            <div class="about-content">
+                <h2>About Me</h2>
+                <p>I am a passionate minimalist designer. I've worked on a variety of projects, from small business websites to large-scale enterprise applications. My focus is always on creating a seamless and delightful user experience while maintaining a clean and elegant aesthetic.</p>
+                <p>I am currently based in London, UK, but I am available for work worldwide. Let's create something great together!</p>
+                <a href="#" class="btn btn-secondary" data-nav="portfolio">GO TO PORTFOLIO</a>
+            </div>
+        </section>
+
+        <section class="cta-section container">
+            <h2>Interested in working with me?</h2>
+            <a href="#" class="btn" data-nav="contact">CONTACT ME</a>
+        </section>
+    </main>
+
+    <!-- Portfolio Section -->
+    <main id="portfolio-page" class="page-section section-hidden">
+        <section class="portfolio-grid container">
+            <!-- Item 1 -->
+            <article class="portfolio-item">
+                <div class="portfolio-image"></div>
+                <div class="portfolio-content">
+                    <h3>Project 1</h3>
+                    <p>This project was a fun exploration into minimalist UI. We focused on clean lines and simple interactions to create a very usable interface.</p>
+                    <a href="#" class="btn btn-secondary" data-nav="portfolio-detail">VIEW PROJECT</a>
+                </div>
+            </article>
+            <!-- Item 2 -->
+            <article class="portfolio-item">
+                <div class="portfolio-image"></div>
+                <div class="portfolio-content">
+                    <h3>Project 2</h3>
+                    <p>A mobile application concept designed to simplify daily tasks. The design prioritizes a smooth flow and an uncluttered user experience.</p>
+                    <a href="#" class="btn btn-secondary" data-nav="portfolio-detail">VIEW PROJECT</a>
+                </div>
+            </article>
+            <!-- Item 3 -->
+            <article class="portfolio-item">
+                <div class="portfolio-image"></div>
+                <div class="portfolio-content">
+                    <h3>Project 3</h3>
+                    <p>A website redesign for a local business. The goal was to modernize their online presence and improve accessibility without sacrificing their brand identity.</p>
+                    <a href="#" class="btn btn-secondary" data-nav="portfolio-detail">VIEW PROJECT</a>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <!-- Portfolio Detail Section -->
+    <main id="portfolio-detail-page" class="page-section section-hidden">
+        <section class="portfolio-detail-header container">
+            <a href="#" class="btn btn-secondary" data-nav="portfolio">&larr; Back to Portfolio</a>
+        </section>
+
+        <section class="portfolio-detail-hero"></section>
+
+        <section class="portfolio-detail-content container">
+            <div class="project-intro">
+                <h2>Project Detail</h2>
+                <p>This project was about creating a simple, intuitive, and elegant user experience for a a product that simplifies complex processes. We focused on a clean, minimalist design to reduce cognitive load and enhance usability.</p>
+                <a href="#" class="btn btn-secondary">VIEW WEBSITE</a>
+            </div>
+            <div class="project-details">
+                <p><strong>Project Name:</strong> Project X</p>
+                <p><strong>Client:</strong> Client Z</p>
+                <p><strong>Role:</strong> Lead Designer</p>
+                <p><strong>Timeline:</strong> 3 Months</p>
+            </div>
+        </section>
+
+        <section class="project-background container">
+            <h3>Project Background</h3>
+            <p>The client needed a fresh look that would appeal to a new, younger demographic. We started with a full audit of their existing site, identifying key pain points and opportunities for improvement. The new design focuses on a mobile-first approach, ensuring a seamless experience across all devices. We worked closely with their development team to implement the new designs, providing clear documentation and assets to ensure a smooth handoff.</p>
+        </section>
+        
+        <section class="project-images container">
+            <div></div>
+            <div></div>
+        </section>
+
+        <section class="prev-next-project container">
+            <a href="#" class="project-link" data-nav="portfolio-detail">
+                <h3>&larr; Prev Project</h3>
+                <span>View Portfolio</span>
+            </a>
+            <a href="#" class="project-link" data-nav="portfolio-detail">
+                <h3>Next Project &rarr;</h3>
+                <span>View Portfolio</span>
+            </a>
+        </section>
+    </main>
+
+    <!-- Contact Section -->
+    <main id="contact-page" class="page-section section-hidden">
+        <section class="contact-form-section container">
+            <div class="contact-content">
+                <h2>Get in Touch</h2>
+                <div class="contact-form">
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" placeholder="Jane Doe">
+                            <p class="error-message">This field is required</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" placeholder="hello@janedoe.com">
+                            <p class="error-message">This field is required</p>
+                            <p class="error-message email-error">Please use a valid email address</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" placeholder="Your message here..."></textarea>
+                            <p class="error-message">This field is required</p>
+                        </div>
+                        <button type="submit" class="btn">SEND MESSAGE</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section container">
+            <h2>Interested in working with me?</h2>
+            <a href="#" class="btn" data-nav="contact">CONTACT ME</a>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-nav">
+                <a href="#" class="logo" data-nav="home">PORTFOLIO</a>
+                <ul>
+                    <li><a href="#" data-nav="home">HOME</a></li>
+                    <li><a href="#" data-nav="portfolio">PORTFOLIO</a></li>
+                    <li><a href="#" data-nav="contact">CONTACT ME</a></li>
+                </ul>
+            </div>
+            <div class="social-icons">
+                <!-- Simple SVG icons for demonstration -->
+                <a href="#" aria-label="Github">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 17 2.22A13.3 13.3 0 0 0 12 11c0-2.45-.63-4.57-1.47-6.22C9.72 2.65 8.54 1 7 1S5.27.65 4.09 1c-.1.35-.4.99-.51 1.63C2.8 4.77 2 7.15 2 9.5c0 5.44 3.3 6.63 6.44 7A3.37 3.37 0 0 0 9 19z"></path>
+                    </svg>
+                </a>
+                <a href="#" aria-label="Twitter">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+                    </svg>
+                </a>
+                <a href="#" aria-label="LinkedIn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                        <rect x="2" y="9" width="4" height="12"></rect>
+                        <circle cx="4" cy="4" r="2"></circle>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // DOM Elements
+        const navLinks = document.querySelectorAll('[data-nav]');
+        const mainNav = document.querySelector('.main-nav');
+        const navToggle = document.querySelector('.nav-toggle');
+        const aboutScrollBtn = document.getElementById('about-scroll-btn');
+        const contactForm = document.getElementById('contact-form');
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const messageInput = document.getElementById('message');
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        // Function to show a specific page and hide others
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page-section');
+            pages.forEach(page => {
+                if (page.id === pageId) {
+                    page.classList.remove('section-hidden');
+                } else {
+                    page.classList.add('section-hidden');
+                }
+            });
+            // Update active link class
+            navLinks.forEach(link => {
+                if (link.dataset.nav === pageId.replace('-page', '')) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+            if (navToggle.style.display !== 'none') {
+                mainNav.classList.remove('is-open');
+            }
+        }
+
+        // Event listener for navigation links
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetPage = e.currentTarget.dataset.nav;
+                if (targetPage === 'portfolio-detail') {
+                    showPage('portfolio-detail-page');
+                } else {
+                    showPage(targetPage + '-page');
+                }
+                window.scrollTo(0, 0); // Scroll to top of page
+            });
+        });
+
+        // Event listener for the "About Me" scroll button
+        aboutScrollBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const aboutSection = document.getElementById('about-me-section');
+            if (aboutSection) {
+                aboutSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+
+        // Event listener for mobile navigation toggle
+        navToggle.addEventListener('click', () => {
+            mainNav.classList.toggle('is-open');
+        });
+
+        // Function to show validation error
+        function showError(input, message) {
+            const formGroup = input.parentElement;
+            formGroup.classList.add('error');
+            const errorMessage = formGroup.querySelector('.error-message:not(.email-error)');
+            if (errorMessage) {
+                errorMessage.style.display = 'block';
+            }
+        }
+
+        // Function to show email validation error
+        function showEmailError(input, message) {
+            const formGroup = input.parentElement;
+            formGroup.classList.add('error');
+            const errorMessage = formGroup.querySelector('.email-error');
+            if (errorMessage) {
+                errorMessage.textContent = message;
+                errorMessage.style.display = 'block';
+            }
+        }
+
+        // Function to clear validation error
+        function clearError(input) {
+            const formGroup = input.parentElement;
+            formGroup.classList.remove('error');
+            const errorMessages = formGroup.querySelectorAll('.error-message');
+            errorMessages.forEach(msg => {
+                msg.style.display = 'none';
+            });
+        }
+        
+        // Form validation on input blur
+        nameInput.addEventListener('blur', () => {
+            if (nameInput.value.trim() !== '') {
+                clearError(nameInput);
+            }
+        });
+
+        emailInput.addEventListener('blur', () => {
+            if (emailInput.value.trim() !== '') {
+                clearError(emailInput);
+            }
+        });
+
+        messageInput.addEventListener('blur', () => {
+            if (messageInput.value.trim() !== '') {
+                clearError(messageInput);
+            }
+        });
+
+
+        // Event listener for form submission
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            let isValid = true;
+
+            // Clear previous errors
+            clearError(nameInput);
+            clearError(emailInput);
+            clearError(messageInput);
+
+            // Validate Name field
+            if (nameInput.value.trim() === '') {
+                showError(nameInput, 'This field is required');
+                isValid = false;
+            }
+
+            // Validate Email field
+            if (emailInput.value.trim() === '') {
+                showError(emailInput, 'This field is required');
+                isValid = false;
+            } else if (!emailRegex.test(emailInput.value.trim())) {
+                showEmailError(emailInput, 'Please use a valid email address');
+                isValid = false;
+            }
+
+            // Validate Message field
+            if (messageInput.value.trim() === '') {
+                showError(messageInput, 'This field is required');
+                isValid = false;
+            }
+
+            // If form is valid, you can process it here
+            if (isValid) {
+                alert('Form submitted successfully! (This is a placeholder, no data is sent)');
+                contactForm.reset();
+            }
+        });
+
+        // Initialize the first page
+        document.addEventListener('DOMContentLoaded', () => {
+            showPage('home-page');
+        });
+
+    </script>
+</body>
+</html>
